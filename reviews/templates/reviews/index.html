@@ -1,0 +1,12 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+  {% if viewed_posts %}
+  Recently viewed posts:
+  <ul>
+      {% for post in viewed_posts %}
+      <li><a href="/posts/{{ post.id }}">{{ post.title }}</a></li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+{% endblock %}

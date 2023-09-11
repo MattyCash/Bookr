@@ -1,0 +1,44 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+      <br>
+      <h3>post Details</h3>
+      <hr>
+      {% if post.cover %}
+            <img src="{{ post.cover.url }}">
+            <br>
+      {% endif %}
+      <span class="text-info">Title: </span> <span>{{ post.title }}</span>
+      <br>
+      <span class="text-info">Publisher: </span><span>{{ post.publisher }}</span>
+      <br>
+      <span class="text-info">Publication Date: </span><span>{{ post.publication_date }}</span>
+      <br>
+      {% if post.sample %}
+            <span class="text-info">Sample: </span><span><a href="{{ post.sample.url }}">Download</a></span>
+            <br>
+      {% endif %}
+      <span class="text-info">Overall Rating: </span><span class="badge badge-primary badge-pill">{{ post_rating }}</span>
+      <br>
+      <hr>
+      <h3>Comments</h3>
+      <ul>
+      {% for comment in comments %}
+            <li class="list-group-item">
+                  <span class="text-info">comment: </span> <span>{{ comment.content }}</span>
+                  <br>
+                  <span class="text-info">Created on: </span><span>{{ comment.date_created }}</span>
+                  <br>
+                  <span class="text-info">Modified on: </span><span>{{ comment.date_edited }}</span>
+                  <br>
+                  <span class="text-info">Creator: </span><span>{{ comment.creator.username }}</span>
+                  <br>
+                  {% if comment.creator.username == user.username %}
+                        <a href="{% url 'comment_edit' post.pk comment.pk %}">Edit comment</a>
+                  {% endif %}
+            </li>
+      {% endfor %}
+      </ul>
+      <a class="btn btn-primary" href="{% url 'comment_create' post.pk %}">Add comment</a>
+      <a class="btn btn-primary" href="{% url 'post_media' post.pk %}">Media</a>
+{% endblock %}

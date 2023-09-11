@@ -1,0 +1,6 @@
+<p>Posts read</p>
+<ul>
+  {% for post in posts_read %}
+  <li><a href="/posts/{{ post.pk }}">{{ post.title }}</a>
+  {% endfor %}
+</ul>

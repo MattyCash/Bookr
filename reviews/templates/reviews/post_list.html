@@ -1,0 +1,23 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+<ul class="list-group">
+  {% for item in post_list %}
+  <li class="list-group-item">
+      <span class="text-info">Title: </span> <span>{{ item.post.title }}</span>
+      <br>
+      <span class="text-info">Publisher: </span><span>{{ item.post.publisher }}</span>
+      <br>
+      <span class="text-info">Publication Date: </span><span>{{ item.post.publication_date }}</span>
+      <br>
+      <span class="text-info">Number of comments: </span><span>{{ item.number_of_comments }}</span>
+      <br>
+      {% if not item.number_of_comments %}
+      <span class="text-secondary">Provide a rating and write the first review for this post.</span>
+      <br>
+      {% endif %}
+      <a class="btn btn-primary btn-sm active" role="button" href="{% url 'post_detail' item.post.pk %}">Comments</a></li>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
